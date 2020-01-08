@@ -15,8 +15,8 @@
  * @param Boolean isCollection
  */
 export default function createApiEndpoint (requestor, endpoint, isCollection = true) {
-  const _get = (params = null) => requestor.makeRequest('get', `/${endpoint}`, params)
-  const _post = (data) => requestor.makeRequest('post', `/${endpoint}`, data)
+  const _get = (params = null) => requestor.makeRequest('get', `/${endpoint}/`, params)
+  const _post = (data) => requestor.makeRequest('post', `/${endpoint}/`, data)
 
   /**
    *
@@ -30,15 +30,15 @@ export default function createApiEndpoint (requestor, endpoint, isCollection = t
   if (isCollection) {
     apiEndpoint.all = _get
     apiEndpoint.create = _post
-    apiEndpoint.find = (id, params = null) => requestor.makeRequest('get', `/${endpoint}/${id}`, params)
-    apiEndpoint.update = (id, data) => requestor.makeRequest('put', `/${endpoint}/${id}`, data)
-    apiEndpoint.delete = apiEndpoint.remove = (id) => requestor.makeRequest('delete', `/${endpoint}/${id}`)
-    apiEndpoint.one = (key) => requestor.endpoint(`${endpoint}/${key}`, `${endpoint}_${key}`, false)
+    apiEndpoint.find = (id, params = null) => requestor.makeRequest('get', `/${endpoint}/${id}/`, params)
+    apiEndpoint.update = (id, data) => requestor.makeRequest('put', `/${endpoint}/${id}/`, data)
+    apiEndpoint.delete = apiEndpoint.remove = (id) => requestor.makeRequest('delete', `/${endpoint}/${id}/`)
+    apiEndpoint.one = (key) => requestor.endpoint(`${endpoint}/${key}/`, `${endpoint}_${key}/`, false)
   } else {
     apiEndpoint.get = _get
     apiEndpoint.post = _post
-    apiEndpoint.put = (data) => requestor.makeRequest('put', `/${endpoint}`, data)
-    apiEndpoint.delete = () => requestor.makeRequest('delete', `/${endpoint}`)
+    apiEndpoint.put = (data) => requestor.makeRequest('put', `/${endpoint}/`, data)
+    apiEndpoint.delete = () => requestor.makeRequest('delete', `/${endpoint}/`)
   }
 
   // Wrap the endpoint with a proxy to handle undefined property as another api endpoint
@@ -50,7 +50,7 @@ export default function createApiEndpoint (requestor, endpoint, isCollection = t
         return apiEndpoint[prop]
       }
 
-      return requestor.endpoint(`${endpoint}/${prop}`, `${endpoint}_${prop}`, !isCollection)
+      return requestor.endpoint(`${endpoint}/${prop}/`, `${endpoint}_${prop}/`, !isCollection)
     }
   })
 

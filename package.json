@@ -1,8 +1,8 @@
 {
-  "name": "axios-rest-client",
-  "version": "0.1.11",
+  "name": "axios-rest-client2",
+  "version": "0.1.12",
   "description": "A simple axios wrapper to make rest api call delightful",
-  "author": "Eldo Magan <magan.eldo@gmail.com>",
+  "author": "goe13 <codethumb@gmail.com>",
   "main": "dist/axios-rest-client.common.js",
   "module": "dist/axios-rest-client.esm.js",
   "unpkg": "dist/axios-rest-client.js",
@@ -26,7 +26,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eldomagan/axios-rest.git"
+    "url": "git+https://github.com/goe13/axios-rest.git"
   },
   "peerDependencies": {
     "axios": "^0.18.0"
